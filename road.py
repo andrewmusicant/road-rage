@@ -13,8 +13,3 @@ class Road:
             self.car_list.append(Car(pos))
             pos += (self.road_length / self.number_of_cars)
         return self.car_list
-
-road = Road()
-car_list = road.populate_road()
-for car in car_list:
-    print(car.position)
