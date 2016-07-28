@@ -9,10 +9,11 @@ class Simulation:
 
 
 def main():
-    road = Road()
-    car_list = road.populate_road()
-    for car in car_list:
-        print(car.position)
+    pass
+    # road = Road()
+    # car_list = road.populate_road()
+    # for car in car_list:
+    #     print(car.position)
 
 if __name__ == '__main__':
     main()
