@@ -3,11 +3,12 @@ import random
 
 class Car:
     def __init__(self, position, car_in_front=None):
-        self.acceleration = 2  # 2 m/s^2
+        self.acceleration = 2.0  # 2 m/s^2
         self.decel_chance = 0.1
         self.max_velocity = 33.3  # m/s
-        self.velocity = 0
-        self.position = np.array([position, position + 5])
+        self.velocity = 0.0
+        self.position = np.array([position, position + 5.0])
+        self.velocity_list = []
 
     def update_car(self, car_in_front, road):
         if random.random() < self.decel_chance:
@@ -15,6 +16,7 @@ class Car:
         else:
             self.accelerate(car_in_front)
         self.get_current_position(road)
+        self.velocity_list.append(self.velocity)
 
     def accelerate(self, car_in_front):
         self.velocity += self.acceleration

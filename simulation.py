@@ -1,5 +1,9 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
 from road import Road
 from car import Car
+
 
 class Simulation:
     def __init__(self):
@@ -17,14 +21,16 @@ class Simulation:
                 else:
                     car_list[index].update_car(car_list[index+1], road)
             self.time += self.d_time
-        for car in car_list:
-            print(car.velocity)
+        return car_list
 
 
 def main():
     sim = Simulation()
-    sim.get_final_velocity()
-
+    car_list = sim.get_final_velocity()
+    for car in car_list:
+        plt.plot(car.velocity_list)
+        plt.title(car)
+    plt.show()
 
 if __name__ == '__main__':
     main()
