@@ -7,6 +7,11 @@ class Simulation:
         self.d_time = 1  # time interval
         self.time = 0
 
+    def get_final_velocity(self):
+        while self.time <= self.t_max:
+            self.time += self.d_time
+
+
 
 def main():
     pass
