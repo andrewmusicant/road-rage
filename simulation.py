@@ -1,8 +1,6 @@
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+import statistics as st
 
 from road import Road
-from car import Car
 
 
 class Simulation:
@@ -16,21 +14,53 @@ class Simulation:
         car_list = road.populate_road()
         while self.time <= self.t_max:
             for index, car in enumerate(car_list):
-                if index >= len(car_list) -1:
+                if index >= len(car_list) - 1:
                     car_list[index].update_car(car_list[0], road)
                 else:
                     car_list[index].update_car(car_list[index+1], road)
             self.time += self.d_time
         return car_list
 
+    def get_car_means(car_list):
+        car_means = []
+        for car in car_list:
+            car_means.append(st.mean(car.velocity_list))
+        return car_means
+
+    def get_speed_limit(car_means):
+        total_mean = st.mean(car_means)
+        stdev = st.pstdev(car_means)
+        speed_limit = total_mean + stdev
+        return speed_limit
+
+    def get_multiple_sims():
+        loop_set = []
+        car_means = []
+
+        for _ in range(1000):
+            sim = Simulation()
+            car_list = sim.get_final_velocity()
+
+            for car in car_list:
+                car_means.append(st.mean(car.velocity_list))
+            loop_set.append(car_list)
+
+        total_mean = st.mean(car_means)
+        stdev = st.pstdev(car_means)
+        speed_limit = total_mean + stdev
+        return total_mean, speed_limit
+
 
 def main():
-    sim = Simulation()
-    car_list = sim.get_final_velocity()
-    for car in car_list:
-        plt.plot(car.velocity_list)
-        plt.title(car)
-    plt.show()
+    # sim = Simulation()
+    # car_list = sim.get_final_velocity()
+    # car_means = Simulation.get_car_means(car_list)
+    # speed_limit = get_speed_limit(car_means)
+    # for car in car_list:
+    #     plt.plot(car.velocity_list)
+    #     plt.title(car)
+    # plt.show()
+    pass
 
 if __name__ == '__main__':
     main()
