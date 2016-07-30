@@ -1,7 +1,11 @@
 # Road Rage
-<<<<<<< HEAD
 
-A simulation of traffic.
-=======
-A simulation of traffic.
->>>>>>> a05fb0f0a1687014ab4144ac99edee178bb5a2a6
+Road Rage is a project to simulate the behavior of drivers in traffic on a new road in order to determine the optimal speed limits.
+
+## Installation
+
+Clone the repository and try running the simulation in Jupyter notebook to see what data you pull.
+
+## Usage
+
+If you would like to try running the simulation with different numbers (increased number of cars, different road lengths, different car speeds), you can change the Car, Road, and Simulation class as you desire to test your new numbers.
