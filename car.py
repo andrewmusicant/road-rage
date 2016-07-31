@@ -19,25 +19,30 @@ class Car:
             self.accelerate(car_in_front)
         self.get_current_position(road)
         self.velocity_list.append(self.velocity)
+        return self
 
     def accelerate(self, car_in_front):
         self.velocity += self.acceleration
         if self.velocity >= self.max_velocity:
             self.velocity = self.max_velocity
         self.check_distance_between_cars(car_in_front)
+        return self
 
     def decelerate(self, car_in_front):
         self.velocity -= self.acceleration
         self.check_distance_between_cars(car_in_front)
+        return self
 
     def check_distance_between_cars(self, car_in_front):
         distance_between = car_in_front.position[0] - self.position[1]
         if distance_between <= self.velocity:
             if self.velocity > car_in_front.velocity:
                 self.velocity = car_in_front.velocity
+        return self
 
     def get_current_position(self, road):
         self.position += self.velocity
         if self.position[1] >= road.length:
             self.position = self.position % road.length
         self.position_list.append(self.position[0])
+        return self

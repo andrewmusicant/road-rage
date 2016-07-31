@@ -1,6 +1,6 @@
 import statistics as st
 
-from road import Road
+from advanced_road import Road
 
 
 class Simulation:
@@ -8,18 +8,22 @@ class Simulation:
         self.t_max = 60
         self.d_time = 1  # time interval
         self.time = 0
+        self.decel_chance = [0.1]  # [0.1, 0.4, 0.1, 1.0, 0.1, 0.2, 0.1]
 
     def get_final_velocity(self):
-        road = Road()
-        car_list = road.populate_road()
-        while self.time <= self.t_max:
-            for index, car in enumerate(car_list):
-                if index >= len(car_list) - 1:
-                    car_list[index].update_car(car_list[0], road)
-                else:
-                    car_list[index].update_car(car_list[index+1], road)
-            self.time += self.d_time
-        return car_list
+        total_car_list = []
+        for percentage in self.decel_chance:
+            road = Road(percentage)
+            car_list = road.populate_road()
+            while self.time <= self.t_max:
+                for index, car in enumerate(car_list):
+                    if index >= len(car_list) - 1:
+                        car_list[index].update_car(car_list[0], road)
+                    else:
+                        car_list[index].update_car(car_list[index+1], road)
+                self.time += self.d_time
+            total_car_list.append(car_list)
+        return total_car_list
 
     def get_car_means(car_list):
         car_means = []
